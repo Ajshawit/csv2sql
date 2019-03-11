@@ -19,11 +19,16 @@ class Dbcreation {
 		    die("Connection failed: " . $conn->connect_error);
 		} 
 		// Create database
-		$sql = "CREATE DATABASE users";
+		$sql = "CREATE TABLE users (
+			id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+			firstname VARCHAR(30) NOT NULL,
+			lastname VARCHAR(30) NOT NULL,
+			email VARCHAR(50),
+		)";
 		if ($conn->query($sql) === TRUE) {
-		    echo "Database created successfully";
+		    echo "Table created successfully";
 		} else {
-		    echo "Error creating database: " . $conn->error;
+		    echo "Error creating Table: " . $conn->error;
 		}
 		return $conn;
 	}
