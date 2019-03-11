@@ -1,4 +1,6 @@
 <?php 
+require_once('db.php');
+
 // Options
 $shortOptions = "u:p:h:";
 
@@ -19,23 +21,15 @@ elseif (array_key_exists("dry_run", $options)) {
 	//perform function without modifying database
 }
 elseif (array_key_exists("create_table", $options)) {
-	//create table
+	$dbcreate = new Dbcreation();
+	$dbcreate->dbcreate($host,$username,$password);
+	dbdisconnect();
 }
 else {
 	//run function that modifies database
 }
 
-function dbconnect($username, $password, $host, $dbname) {
-	// Create connection
-	$conn = new mysqli($host, $username, $password);
-	// Check connection
-	if ($conn->connect_error) {
-	    die("Connection failed: " . $conn->connect_error);
-	} 
-
-}
-
-function dbdisconnect {
+function dbdisconnect() {
 	$conn->close();
 }
 
