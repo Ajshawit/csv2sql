@@ -2,7 +2,7 @@
 require_once('db.php');
 
 // Options
-$shortOptions = "u:p:h:";
+$shortOptions = "u:p:h:d:";
 
 $longOptions = array("file:", "help::", "dry_run::", "create_table::");
 
@@ -15,6 +15,7 @@ if (array_key_exists("help", $options)) {
 	print "-u - MySQL username \n";
 	print "-p - MySQL password \n";
 	print "-h - MySQL host \n";
+	print "-d - MySQL database name";
 	print "--help - Show this message\n";
 }
 elseif (array_key_exists("dry_run", $options)) {
@@ -22,7 +23,7 @@ elseif (array_key_exists("dry_run", $options)) {
 }
 elseif (array_key_exists("create_table", $options)) {
 	$tablecreate = new Tablecreation();
-	$tablecreate->tablecreate($options["h"],$options["u"],$options["p"]);
+	$tablecreate->tablecreate($options["h"],$options["u"],$options["p"], $options["d"]);
 	dbdisconnect();
 }
 else {
