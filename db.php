@@ -26,11 +26,12 @@ class Tablecreation {
 			email VARCHAR(50)
 		)";
 		if ($conn->query($sql) === TRUE) {
-		    echo "Table created successfully";
+		    echo "Table created successfully \n";
 		} else {
-		    echo "Error creating Table: " . $conn->error;
+		    echo "Error creating Table: " . $conn->error . "\n";
 		}
 		return $conn;
+		$conn->close;
 	}
 }
 
