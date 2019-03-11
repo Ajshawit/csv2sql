@@ -10,20 +10,20 @@ class Dbconnection {
 		return $conn;
 	}
 }
-class Dbcreation {
-	public function dbcreate($host,$username,$password){
+class Tablecreation {
+	public function tablecreate($host,$username,$password, $dbname){
 		//Create connection
-		$conn = new mysqli($servername, $username, $password);
+		$conn = new mysqli($servername, $username, $password, $dbname);
 		// Check connection
 		if ($conn->connect_error) {
 		    die("Connection failed: " . $conn->connect_error);
 		} 
-		// Create database
+		// Create table
 		$sql = "CREATE TABLE users (
 			id INT(6) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
 			firstname VARCHAR(30) NOT NULL,
 			lastname VARCHAR(30) NOT NULL,
-			email VARCHAR(50),
+			email VARCHAR(50)
 		)";
 		if ($conn->query($sql) === TRUE) {
 		    echo "Table created successfully";
