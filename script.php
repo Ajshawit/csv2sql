@@ -21,8 +21,8 @@ elseif (array_key_exists("dry_run", $options)) {
 	//perform function without modifying database
 }
 elseif (array_key_exists("create_table", $options)) {
-	$dbcreate = new Dbcreation();
-	$dbcreate->dbcreate($options["h"],$options["u"],$options["p"]);
+	$tablecreate = new Tablecreation();
+	$tablecreate->tablecreate($options["h"],$options["u"],$options["p"]);
 	dbdisconnect();
 }
 else {
