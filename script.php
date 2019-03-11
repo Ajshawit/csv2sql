@@ -21,18 +21,23 @@ if (array_key_exists("help", $options)) {
 elseif (array_key_exists("dry_run", $options)) {
 	// $db = new Dbconnection();
 	// $db->dbconnect($options["h"],$options["u"],$options["p"], $options["d"]);
-	$row = 1;
-	if (($handle = fopen($options["file"] . ".csv", "r")) !== FALSE) {
-    while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-        $num = count($data);
-        echo "$num fields in line $row\n";
-        $row++;
-        for ($c=0; $c < $num; $c++) {
-            echo $data[$c] . "\n";
-        }
-    }
-    fclose($handle);
-}
+	$csv = array_map('str_getcsv', file($options["file"] . ".csv"));
+	array_walk($csv, function(&$a) use ($csv) {
+		$a = array_combine($csv[0], $a);
+	});
+	//Remove column header
+	array_shift($csv);
+	
+	foreach ($csv as $key => $value) {
+		if ($key == "name" || $key == "surname") {
+			$value = trim(ucfirst($value));
+		}
+		else {
+			$value = trim($value);
+		}
+	}
+
+	print_r($csv);
 
 }
 elseif (array_key_exists("create_table", $options)) {
