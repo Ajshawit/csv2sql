@@ -22,7 +22,7 @@ elseif (array_key_exists("dry_run", $options)) {
 }
 elseif (array_key_exists("create_table", $options)) {
 	$dbcreate = new Dbcreation();
-	$dbcreate->dbcreate($host,$username,$password);
+	$dbcreate->dbcreate($options["h"],$options["u"],$options["p"]);
 	dbdisconnect();
 }
 else {
