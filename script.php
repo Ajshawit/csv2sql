@@ -25,19 +25,35 @@ elseif (array_key_exists("dry_run", $options)) {
 	array_walk($csv, function(&$a) use ($csv) {
 		$a = array_combine($csv[0], $a);
 	});
+
 	//Remove column header
 	array_shift($csv);
-	
-	foreach ($csv as $key => $value) {
-		if ($key == "name" || $key == "surname") {
-			$value = trim(ucfirst($value));
+
+	print_r($csv);
+
+	print_r($csv[0]["surname"]);
+
+	$names = array();
+	$surnames = array();
+	$emails = array();
+
+    foreach ($csv as $value) {
+    	if ($value["name"]) {
+			$names[] = $value["name"];
 		}
-		else {
-			$value = trim($value);
+		elseif ($value["surname"]) {
+			echo $value["surname"];
+			$surnames[] = $value["surname"];
+		}
+		elseif ($value["email"]) {
+			echo $value["email"];
+			$emails[] = $value["email"];
 		}
 	}
 
-	print_r($csv);
+	print_r($names);
+	print_r($surnames);
+	print_r($emails);
 
 }
 elseif (array_key_exists("create_table", $options)) {
